@@ -26,7 +26,7 @@ public class FilmeController : ControllerBase
     /// <response code="201">Caso inserção seja feita com sucesso</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public IActionResult AdcionaFilme([FromBody]CreateFilmeDto filmeDto) // [FromBody] não é necessário, pois ele ja infere automaticamente q é um frombody
+    public IActionResult AdcionaFilme([FromBody]CreateFilmeDto filmeDto)
     {
         Filme filme = _mapper.Map<Filme>(filmeDto);
         _context.Filmes.Add(filme);
@@ -43,7 +43,7 @@ public class FilmeController : ControllerBase
     /// <response code="200">Caso a requisição seja feita com sucesso</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IEnumerable<ReadFilmeDto> RecuperaFilmes([FromQuery] int skip = 0,[FromQuery]int take = 50) // [FromQuery] não é necessário, .NET8 ja infere automaticamente
+    public IEnumerable<ReadFilmeDto> RecuperaFilmes([FromQuery] int skip = 0,[FromQuery]int take = 50)
     {
         return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take));
     }
