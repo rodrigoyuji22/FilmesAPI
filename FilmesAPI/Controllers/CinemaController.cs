@@ -59,7 +59,7 @@ public class CinemaController : ControllerBase
         }
         _mapper.Map(cinemaDto, cinema);
         _context.SaveChanges();
-        return Ok();
+        return NoContent();
     }
 
     [HttpPatch("{id}")]
