@@ -30,11 +30,17 @@ public class CinemaController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult RecuperaCinemas()
+    public IActionResult RecuperaCinemas([FromQuery]int? enderecoId = null)
     {
-        var cinemas = _context.Cinemas.ToList();
-        var cinemasDto = _mapper.Map<List<ReadCinemaDto>>(cinemas);
-        return Ok(cinemasDto);
+        if(enderecoId == null)
+        {
+            var cinemas = _context.Cinemas.ToList();
+            var cinemasDto = _mapper.Map<List<ReadCinemaDto>>(cinemas);
+            return Ok(cinemasDto);
+        }
+        var cinemaPorId = _context.Cinemas.FirstOrDefault(x => x.EnderecoId == enderecoId);
+        var cinemaPorIdDto = _mapper.Map<ReadCinemaDto>(cinemaPorId);
+        return Ok(cinemaPorIdDto);
     }
 
     [HttpGet("{id}")]
